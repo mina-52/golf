@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>バブル世代の垢抜け道場</title>
+    <title>美ジネスマン</title>
     <style>
         * {
             margin: 0;
@@ -213,10 +213,17 @@
 
         .book-btn:hover, .primary-btn:hover, .secondary-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 165, 0, 0.5); /* ホバー時のシャドウも強めに */
+            box-shadow: 0 8px 25px rgba(255, 165, 0, 0.5); /* ホバー時のシャドウも深めに */
         }
         .secondary-btn:hover { /* セカンダリボタンのホバーはグレー系のシャドウ */
             box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+        }
+        
+        .primary-btn:disabled, .secondary-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
         }
 
         .ai-section {
@@ -305,7 +312,7 @@
 
         .points-section:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 152, 0, 0.5); /* ホバー時のシャドウも強めに */
+            box-shadow: 0 15px 35px rgba(255, 152, 0, 0.5); /* ホバー時のシャドウも深めに */
         }
 
         .points-title {
@@ -594,7 +601,7 @@
 
         .exchange-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(255, 165, 0, 0.4); /* ホバー時のシャドウも強めに */
+            box-shadow: 0 6px 18px rgba(255, 165, 0, 0.4);
         }
 
         .bottom-nav {
@@ -756,6 +763,207 @@
             border-top: 1px solid #e9ecef;
         }
 
+        /* Amenity Selection styles */
+        .amenity-option {
+            background: white;
+            border: 2px solid #DDE3E9;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            position: relative; /* For purchase button positioning */
+        }
+
+        .amenity-option:hover, .amenity-option.selected {
+            border-color: #0A3D34;
+            background: rgba(10, 61, 52, 0.05);
+            box-shadow: 0 8px 20px rgba(10, 61, 52, 0.1);
+        }
+
+        .amenity-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            margin-right: 15px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .amenity-details {
+            flex-grow: 1;
+        }
+
+        .amenity-title {
+            font-weight: 600;
+            color: #0A3D34;
+            margin-bottom: 5px;
+        }
+
+        .amenity-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .amenity-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D32F2F;
+            margin-top: 5px;
+        }
+        .amenity-recommendation {
+            font-size: 13px;
+            font-weight: 600;
+            color: #28A745; /* 緑系 */
+            margin-top: 5px;
+        }
+
+        .amenity-purchase-btn {
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%); /* オレンジ系の購入ボタン */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+            margin-left: 15px; /* Adjust spacing */
+            flex-shrink: 0;
+        }
+
+        .amenity-purchase-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(255, 140, 0, 0.4);
+        }
+
+        /* Questionnaire styles */
+        .question-group {
+            background: linear-gradient(135deg, #fff 0%, #F0F4F7 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(10, 61, 52, 0.1);
+        }
+
+        .question-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0A3D34;
+            margin-bottom: 15px;
+        }
+
+        .question-option {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-option input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2); /* チェックボックスを少し大きく */
+        }
+        
+        .purchase-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #DDE3E9;
+            font-size: 14px;
+        }
+        .purchase-summary-item:last-child {
+            border-bottom: none;
+        }
+        .purchase-total {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 15px;
+            border-top: 2px solid #0A3D34;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* AI Diagnosis Graph styles */
+        .diagnosis-graph {
+            background: linear-gradient(135deg, #fff 0%, #F0F4F7 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(10, 61, 52, 0.1);
+            text-align: center;
+        }
+        .graph-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0A3D34;
+            margin-bottom: 15px;
+        }
+        .graph-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 100px; /* グラフ全体の高さ */
+            background-color: #f8fcfd;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #e0e6eb;
+        }
+        .graph-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            width: 15%; /* 各バーの幅 */
+            max-width: 50px;
+            margin: 0 2%;
+        }
+        .graph-bar {
+            width: 80%;
+            background: linear-gradient(to top, #28A745, #5cb85c); /* 緑のグラデーション */
+            border-radius: 3px;
+            transition: height 0.5s ease-out;
+            margin-bottom: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .graph-score {
+            font-size: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+        .graph-date {
+            font-size: 9px;
+            color: #666;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        /* AI Avatar styles */
+        .ai-avatar-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: none; /* 初期状態では非表示 */
+        }
+
+        .ai-avatar-container img {
+            width: 150px; /* アバター画像のサイズを大きく */
+            height: 150px; /* アバター画像のサイズを大きく */
+            border-radius: 50%; /* 丸いアバター */
+            object-fit: cover;
+            border: 5px solid #FFD700; /* ゴールドの枠線を太く */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* シャドウも調整 */
+        }
+
         /* Responsive Adjustments */
         @media (min-width: 768px) {
             .header {
@@ -877,7 +1085,7 @@
 <body>
     <div class="nav-tabs">
         <div class="nav-tab active" data-screen="home">ホーム</div>
-        <div class="nav-tab" data-screen="booking">出張予約</div>
+        <div class="nav-tab" data-screen="booking">アメニティ予約</div>
         <div class="nav-tab" data-screen="refresh">リフレッシュ</div>
         <div class="nav-tab" data-screen="ai">AI診断</div>
         <div class="nav-tab" data-screen="articles">美容記事</div>
@@ -886,8 +1094,8 @@
 
     <div class="screen active" id="home-screen">
         <div class="header">
-            <div class="logo">バブル世代の垢抜け道場</div>
-            <div class="tagline">もう『残念』とは言わせない！大人の男を磨く究極のアプリ</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">ビジネスシーンで輝く。本物の魅力は、セルフケアから</div>
         </div>
 
         <div class="content">
@@ -898,16 +1106,15 @@
             </div>
 
             <div class="service-card">
-                <div class="service-icon">✂️</div>
-                <div class="service-title">出張メンズグルーミング</div>
-                <div class="service-desc">プロの理容師があなたの自宅やオフィスに出張。ヘアセット、眉毛カット、シェービングなど。</div>
+                <div class="service-icon">🏨</div> <div class="service-title">ビジネスホテルアメニティ提供</div>
+                <div class="service-desc">ご滞在のビジネスホテルに、AI診断と悩み問診に基づいた最適な美容アメニティをお届けします。</div>
                 <button class="book-btn" onclick="showScreen('booking-screen')">今すぐ予約</button>
             </div>
 
             <div class="service-card">
                 <div class="service-icon">🧖‍♂️</div>
-                <div class="service-title">リフレッシュサービス</div>
-                <div class="service-desc">ゴルフ場や喫煙所で利用できる、短時間で心身を癒すリフレッシュサービス。</div>
+                <div class="service-title">ゴルフ場リフレッシュサービス</div>
+                <div class="service-desc">ゴルフ場で利用できる、短時間で心身を癒すリフレッシュサービス。</div>
                 <button class="book-btn" onclick="showScreen('refresh-screen')">サービス予約</button>
             </div>
 
@@ -943,84 +1150,76 @@
     <div class="screen" id="booking-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('home-screen')">←</button>
-            <div class="logo">垢抜け道場 出張予約</div>
-            <div class="tagline">ご希望の場所で、プロの技術を</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">ご滞在のビジネスホテルに、最適なアメニティを</div>
         </div>
 
         <div class="content">
-            <div class="service-options">
-                <div class="service-option" data-price="5000" data-points="50" data-duration="20分" onclick="selectService(this)">
-                    <div class="option-title">クイックヘアセット</div>
-                    <div class="option-price">¥5,000</div>
-                    <div class="option-desc">急な会議やデート前に最適 **美容相談（無料）付き**</div>
-                </div>
-                <div class="service-option" data-price="4000" data-points="40" data-duration="15分" onclick="selectService(this)">
-                    <div class="option-title">眉毛カット＆ケア</div>
-                    <div class="option-price">¥4,000</div>
-                    <div class="option-desc">印象を左右する眉をプロが整えます **美容相談（無料）付き**</div>
-                </div>
-                <div class="service-option" data-price="6000" data-points="60" data-duration="25分" onclick="selectService(this)">
-                    <div class="option-title">極上シェービング</div>
-                    <div class="option-price">¥6,000</div>
-                    <div class="option-desc">プロの技で深剃り＆肌ケア **美容相談（無料）付き**</div>
-                </div>
-                <div class="service-option" data-price="12000" data-points="120" data-duration="60分" onclick="selectService(this)">
-                    <div class="option-title">フルコース身だしなみ</div>
-                    <div class="option-price">¥12,000</div>
-                    <div class="option-desc">ヘアセット、眉毛カット、シェービングの贅沢コース **美容相談（無料）付き**</div>
-                </div>
-            </div>
-
             <div class="form-group">
-                <label class="form-label">希望日時</label>
-                <input type="date" class="form-input" min="2025-07-05">
-            </div>
-
-            <div class="time-slots">
-                <div class="time-slot" onclick="selectTime(this)">9:00</div>
-                <div class="time-slot" onclick="selectTime(this)">11:00</div>
-                <div class="time-slot" onclick="selectTime(this)">13:00</div>
-                <div class="time-slot" onclick="selectTime(this)">15:00</div>
-                <div class="time-slot" onclick="selectTime(this)">17:00</div>
-                <div class="time-slot" onclick="selectTime(this)">19:00</div>
+                <label class="form-label">チェックイン日</label>
+                <input type="date" class="form-input" id="check-in-date" min="2025-07-06">
             </div>
 
             <div class="form-group">
                 <label class="form-label">サービス場所</label>
-                <select class="form-select" id="booking-location-type">
-                    <option>自宅</option>
-                    <option>オフィス</option>
+                <select class="form-select" id="booking-location-type" disabled>
                     <option>ビジネスホテル</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label class="form-label">住所</label>
-                <input type="text" class="form-input" placeholder="東京都渋谷区...">
+                <label class="form-label">ホテル名・住所</label>
+                <input type="text" class="form-input" id="hotel-name-address" placeholder="ホテル名と住所を入力してください">
+            </div>
+
+            <div class="service-card" style="background: #e6f7ff; border-color: #91d5ff;">
+                <div class="service-title" style="color: #1890ff;">💡 アメニティのご提供について</div>
+                <div class="service-desc" style="color: #333;">
+                    お客様に最適なアメニティをお届けするため、**AIパーソナルケア診断**と**悩み問診**へのご回答が必須となります。
+                    <br>両方完了後にアメニティをお選びいただけます。
+                </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">特別なご要望</label>
-                <textarea class="form-textarea" placeholder="アレルギーや特別なご要望がございましたらお書きください"></textarea>
+                <label class="form-label">AIパーソナルケア診断</label>
+                <button class="secondary-btn" id="ai-diagnosis-btn" onclick="showScreen('ai-screen')">診断する</button>
+                <div id="ai-diagnosis-status" style="margin-top: 10px; font-size: 14px; color: #666;">
+                    未完了
+                </div>
             </div>
 
-            <button class="primary-btn" onclick="showBookingConfirmation()">予約を確認</button>
+            <div class="form-group">
+                <label class="form-label">お肌や髪の悩み問診</label>
+                <button class="secondary-btn" id="concern-questionnaire-btn" onclick="showScreen('concern-questionnaire-screen')">問診に答える</button>
+                <div id="concern-summary-display" style="margin-top: 10px; font-size: 14px; color: #666;">
+                    未回答
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">提供アメニティ選択</label>
+                <button class="secondary-btn" id="amenity-selection-btn" onclick="showScreen('amenity-selection-screen')" disabled>AI診断・問診結果からアメニティを選ぶ</button>
+                <div id="selected-amenities-display" style="margin-top: 10px; font-size: 14px; color: #666;">
+                    選択されていません
+                </div>
+            </div>
+
+            <button class="primary-btn" id="confirm-booking-btn" onclick="showBookingConfirmation()" disabled>予約を確認</button>
         </div>
     </div>
 
     <div class="screen" id="refresh-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('home-screen')">←</button>
-            <div class="logo">垢抜け道場 リフレッシュ</div>
-            <div class="tagline">ゴルフ場や喫煙所で手軽にリフレッシュ</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">ゴルフ場でも、自分を磨くひとときを</div>
         </div>
 
         <div class="content">
-            <div class="form-group">
+            <div class="form-group" style="display: none;">
                 <label class="form-label">利用場所を選択</label>
                 <select class="form-select" id="refresh-location-type" onchange="filterRefreshLocations()">
                     <option value="golf">ゴルフ場</option>
-                    <option value="smoking">喫煙所</option>
                 </select>
             </div>
 
@@ -1037,68 +1236,71 @@
                 </div>
                 <div class="refresh-location-card" data-points="50" data-location-type="golf" onclick="selectRefreshLocation(this)">
                     <div class="location-name">武蔵野グリーンヒルズ</div>
-                    <div class="location-desc">埼玉県入間市</div>
                     <div class="location-availability">残り2枠</div>
                 </div>
             </div>
 
-            <div class="refresh-locations" id="smoking-locations" style="display: none;">
-                <div class="refresh-location-card" data-points="30" data-location-type="smoking" onclick="selectRefreshLocation(this)">
-                    <div class="location-name">新宿駅東口喫煙所（プライベートブース）</div>
-                    <div class="location-desc">東京都新宿区新宿3丁目</div>
-                    <div class="location-availability">空き有り</div>
-                </div>
-                <div class="refresh-location-card" data-points="30" data-location-type="smoking" onclick="selectRefreshLocation(this)">
-                    <div class="location-name">品川駅港南口喫煙所（ビジネス向け）</div>
-                    <div class="location-desc">東京都港区港南2丁目</div>
-                    <div class="location-availability">残り1枠</div>
-                </div>
-            </div>
-
             <div class="refresh-service-content" id="golf-refresh-services">
-                <div class="service-title" style="margin-bottom: 15px;">ゴルフ場リフレッシュサービス</div>
+                <div class="service-title" style="margin-bottom: 15px;">**基本リフレッシュコース（お一人様向け）**</div>
                 <div class="refresh-service-item">
-                    <span class="name">クールダウンシャワー＆マッサージ</span>
-                    <span class="price">¥2,500 / 15分</span>
+                    <span class="name">クールダウンミストシャワー</span>
+                    <span class="price">**無料**</span>
                 </div>
                 <div class="refresh-service-item">
-                    <span class="name">UVアフターケア＆保湿パック</span>
-                    <span class="price">¥1,500 / 10分</span>
+                    <span class="name">UVダメージ集中ケア（肌・髪）</span>
+                    <span class="price">¥1,000 / 5分</span>
                 </div>
                 <div class="refresh-service-item">
-                    <span class="name">プロのヘッドスパ（オプション）</span>
-                    <span class="price">＋¥2,000 / 10分</span>
-                </div>
-                <div class="refresh-service-note">※冷たいタオル・ドリンク付き。各ゴルフ場に合わせた専用ブースをご用意。</div>
-            </div>
-
-            <div class="refresh-service-content" id="smoking-refresh-services" style="margin-top: 20px; display: none;">
-                <div class="service-title" style="margin-bottom: 15px;">喫煙所クイックリフレッシュ</div>
-                <div class="refresh-service-item">
-                    <span class="name">ニオイケア＆口臭リフレッシュ</span>
-                    <span class="price">¥500 / 5分</span>
-                </div>
-                <div class="refresh-service-item">
-                    <span class="name">クイックマッサージチェア</span>
+                    <span class="name">疲労回復マッサージチェア</span>
                     <span class="price">¥800 / 10分</span>
                 </div>
                 <div class="refresh-service-item">
-                    <span class="name">ビジネスマン向けアイケア</span>
-                    <span class="price">¥700 / 5分</span>
+                    <span class="name">美容プロテイン提供</span>
+                    <span class="price">¥500 / 1杯</span>
                 </div>
-                <div class="refresh-service-note">※強力脱臭・換気システム完備。コーヒー・エナジードリンク（有料）提供あり。</div>
+                <div class="refresh-service-item">
+                    <span class="name">プロによるクイックフェイシャル</span>
+                    <span class="price">¥2,000 / 10分</span>
+                </div>
+                <div class="refresh-service-item">
+                    <span class="name">プロのヘッドスパ</span>
+                    <span class="price">¥2,000 / 10分</span>
+                </div>
+                 <div class="refresh-service-note">※冷たいタオル・ドリンク完備。</div>
+            </div>
+
+            <div class="refresh-service-content" id="parent-child-services" style="margin-top: 20px;">
+                <div class="service-title" style="margin-bottom: 15px;">**親子で楽しむゴルフ場リフレッシュコース**</div>
+                <div class="refresh-service-item">
+                    <span class="name">親子で始める肌育レッスン</span>
+                    <span class="price">¥3,000 / 20分</span>
+                </div>
+                <div class="refresh-service-item">
+                    <span class="name">親子でクールダウンスパ</span>
+                    <span class="price">¥4,000 / 25分</span>
+                </div>
+                <div class="refresh-service-item">
+                    <span class="name">親子で楽しむアロマフットバス＆ネイルケア</span>
+                    <span class="price">¥3,500 / 20分</span>
+                </div>
+                <div class="refresh-service-item">
+                    <span class="name">親子で体験！プロのヘアアレンジレッスン</span>
+                    <span class="price">¥4,500 / 30分</span>
+                </div>
+                 <div class="refresh-service-item">
+                    <span class="name">親子向けビューティーフード相談会</span>
+                    <span class="price">¥2,500 / 15分</span>
+                </div>
+                <div class="refresh-service-note">※お子様（小学生以上推奨）との特別な思い出作りに。共通の話題と会話が増えます。</div>
             </div>
 
 
             <div class="form-group">
                 <label class="form-label">利用希望時間</label>
                 <div class="time-slots">
-                    <div class="time-slot" onclick="selectTime(this)">9:00</div>
-                    <div class="time-slot" onclick="selectTime(this)">10:00</div>
-                    <div class="time-slot" onclick="selectTime(this)">11:00</div>
-                    <div class="time-slot" onclick="selectTime(this)">12:00</div>
-                    <div class="time-slot" onclick="selectTime(this)">13:00</div>
-                    <div class="time-slot" onclick="selectTime(this)">14:00</div>
+                    <div class="time-slot" onclick="selectTime(this)">プレー前</div>
+                    <div class="time-slot" onclick="selectTime(this)">ハーフターン</div>
+                    <div class="time-slot" onclick="selectTime(this)">プレー後</div>
                 </div>
             </div>
 
@@ -1109,8 +1311,8 @@
     <div class="screen" id="ai-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('home-screen')">←</button>
-            <div class="logo">垢抜け道場 AIパーソナルケア診断</div>
-            <div class="tagline">最新のAI技術で肌状態を分析</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">あなたの魅力をAIが引き出します</div>
         </div>
 
         <div class="content">
@@ -1147,11 +1349,15 @@
     <div class="screen" id="ai-result-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('ai-screen')">←</button>
-            <div class="logo">垢抜け道場 診断結果</div>
+            <div class="logo">美ジネスマン</div>
             <div class="tagline" id="ai-result-tagline"></div>
         </div>
 
         <div class="content">
+            <div id="cute-avatar-container" class="ai-avatar-container">
+                <img src="cute-girl.png" alt="AIアバター" />
+            </div>
+
             <div class="diagnosis-result">
                 <div class="result-score" id="result-score">85</div>
                 <div class="result-title" id="result-title"></div>
@@ -1173,44 +1379,231 @@
                     ヘッドスパ付きのグルーミングがおすすめ
                 </div>
             </div>
-
-            <button class="primary-btn" onclick="showScreen('booking-screen')">推奨サービスを予約</button>
+            
+            <button class="primary-btn" onclick="showScreen('booking-screen')">アメニティ予約に戻る</button>
             <button class="secondary-btn" onclick="showScreen('ai-screen')">再診断する</button>
         </div>
     </div>
 
+    <div class="screen" id="concern-questionnaire-screen">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('booking-screen')">←</button>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">あなたの美容の悩みを教えてください</div>
+        </div>
+        <div class="content">
+            <div class="question-group">
+                <div class="question-title">お肌に関するお悩みはありますか？（複数選択可）</div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-dry" name="skin-concern" value="乾燥">
+                    <label for="concern-dry">乾燥が気になる</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-oily" name="skin-concern" value="テカリ">
+                    <label for="concern-oily">Tゾーンのテカリ、ベタつき</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-wrinkles" name="skin-concern" value="シワ">
+                    <label for="concern-wrinkles">目元や口元のシワ</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-pores" name="skin-concern" value="毛穴">
+                    <label for="concern-pores">毛穴の開き、黒ずみ</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-sensitive" name="skin-concern" value="敏感肌">
+                    <label for="concern-sensitive">肌が敏感で荒れやすい</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">髪の毛に関するお悩みはありますか？（複数選択可）</div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-thinning" name="hair-concern" value="薄毛">
+                    <label for="concern-thinning">薄毛、抜け毛</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-grayhair" name="hair-concern" value="白髪">
+                    <label for="concern-grayhair">白髪が気になる</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-dryhair" name="hair-concern" value="髪の乾燥">
+                    <label for="concern-dryhair">髪のパサつき、ダメージ</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-dandruff" name="hair-concern" value="フケ">
+                    <label for="concern-dandruff">フケ、かゆみ</label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <div class="question-title">匂いに関するお悩みはありますか？（複数選択可）</div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-body-odor" name="smell-concern" value="体臭">
+                    <label for="concern-body-odor">体臭が気になる</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-scalp-odor" name="smell-concern" value="頭皮の匂い">
+                    <label for="concern-scalp-odor">頭皮の匂いが気になる</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-foot-odor" name="smell-concern" value="足の匂い">
+                    <label for="concern-foot-odor">足の匂いが気になる</label>
+                </div>
+                <div class="question-option">
+                    <input type="checkbox" id="concern-oral-odor" name="smell-concern" value="口臭">
+                    <label for="concern-oral-odor">口臭が気になる</label>
+                </div>
+            </div>
+
+            <button class="primary-btn" onclick="submitConcerns()">問診を完了</button>
+            <button class="secondary-btn" onclick="showScreen('booking-screen')">アメニティ予約に戻る</button>
+        </div>
+    </div>
+
+
+    <div class="screen" id="amenity-selection-screen">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('booking-screen')">←</button>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">あなたに最適なアメニティをご提案</div>
+        </div>
+
+        <div class="content">
+            <p style="margin-bottom: 20px; font-size: 14px; color: #666;">
+                あなたの肌状態や悩みに合わせたアメニティをAIが厳選しました。滞在先ホテルにて無料で提供されます。複数選択可能です。
+                <br>気に入った商品はそのまま購入することもできます。
+            </p>
+
+            <div id="amenity-options-list">
+                <div class="amenity-option" data-amenity-name="高保湿ローション" data-amenity-id="1" data-price="2500" data-recommendation-score="90" onclick="selectAmenity(this)">
+                    <img src="https://via.placeholder.com/60x60?text=Lotion" alt="高保湿ローション" class="amenity-image">
+                    <div class="amenity-details">
+                        <div class="amenity-title">高保湿ローション</div>
+                        <div class="amenity-desc">乾燥肌の方におすすめの、しっとり潤う化粧水。</div>
+                        <div class="amenity-price">¥2,500</div>
+                        <div class="amenity-recommendation">おすすめ度: ★★★★★ (90%)</div>
+                    </div>
+                    <button class="amenity-purchase-btn" data-amenity-id="1" onclick="purchaseAmenity(event, this)">購入</button>
+                </div>
+                <div class="amenity-option" data-amenity-name="皮脂コントロール洗顔料" data-amenity-id="2" data-price="1800" data-recommendation-score="85" onclick="selectAmenity(this)">
+                    <img src="https://via.placeholder.com/60x60?text=Cleanser" alt="皮脂コントロール洗顔料" class="amenity-image">
+                    <div class="amenity-details">
+                        <div class="amenity-title">皮脂コントロール洗顔料</div>
+                        <div class="amenity-desc">Tゾーンのテカリが気になる方におすすめのさっぱり洗顔料。</div>
+                        <div class="amenity-price">¥1,800</div>
+                        <div class="amenity-recommendation">おすすめ度: ★★★★☆ (85%)</div>
+                    </div>
+                    <button class="amenity-purchase-btn" data-amenity-id="2" onclick="purchaseAmenity(event, this)">購入</button>
+                </div>
+                <div class="amenity-option" data-amenity-name="エイジングケア美容液" data-amenity-id="3" data-price="4800" data-recommendation-score="95" onclick="selectAmenity(this)">
+                    <img src="https://via.placeholder.com/60x60?text=Serum" alt="エイジングケア美容液" class="amenity-image">
+                    <div class="amenity-details">
+                        <div class="amenity-title">エイジングケア美容液</div>
+                        <div class="amenity-desc">ハリと弾力を与える高機能美容液。年齢サインが気になる方に。</div>
+                        <div class="amenity-price">¥4,800</div>
+                        <div class="amenity-recommendation">おすすめ度: ★★★★★ (95%)</div>
+                    </div>
+                    <button class="amenity-purchase-btn" data-amenity-id="3" onclick="purchaseAmenity(event, this)">購入</button>
+                </div>
+                <div class="amenity-option" data-amenity-name="敏感肌用乳液" data-amenity-id="4" data-price="2200" data-recommendation-score="80" onclick="selectAmenity(this)">
+                    <img src="https://via.placeholder.com/60x60?text=Emulsion" alt="敏感肌用乳液" class="amenity-image">
+                    <div class="amenity-details">
+                        <div class="amenity-title">敏感肌用乳液</div>
+                        <div class="amenity-desc">刺激に弱いデリケートな肌も優しく保湿する低刺激処方。</div>
+                        <div class="amenity-price">¥2,200</div>
+                        <div class="amenity-recommendation">おすすめ度: ★★★★☆ (80%)</div>
+                    </div>
+                    <button class="amenity-purchase-btn" data-amenity-id="4" onclick="purchaseAmenity(event, this)">購入</button>
+                </div>
+                 <div class="amenity-option" data-amenity-name="育毛エッセンス" data-amenity-id="5" data-price="5500" data-recommendation-score="75" onclick="selectAmenity(this)">
+                    <img src="https://via.placeholder.com/60x60?text=Hair+Essence" alt="育毛エッセンス" class="amenity-image">
+                    <div class="amenity-details">
+                        <div class="amenity-title">育毛エッセンス</div>
+                        <div class="amenity-desc">薄毛や抜け毛が気になる方へ。頭皮環境を整え、健やかな髪へ。</div>
+                        <div class="amenity-price">¥5,500</div>
+                        <div class="amenity-recommendation">おすすめ度: ★★★★☆ (75%)</div>
+                    </div>
+                    <button class="amenity-purchase-btn" data-amenity-id="5" onclick="purchaseAmenity(event, this)">購入</button>
+                </div>
+                <div class="amenity-option" data-amenity-name="デオドラントボディソープ" data-amenity-id="6" data-price="1500" data-recommendation-score="88" onclick="selectAmenity(this)">
+                    <img src="https://via.placeholder.com/60x60?text=Deo+Soap" alt="デオドラントボディソープ" class="amenity-image">
+                    <div class="amenity-details">
+                        <div class="amenity-title">デオドラントボディソープ</div>
+                        <div class="amenity-desc">体臭が気になる方へ。清潔感のある爽やかな香りで一日中快適に。</div>
+                        <div class="amenity-price">¥1,500</div>
+                        <div class="amenity-recommendation">おすすめ度: ★★★★★ (88%)</div>
+                    </div>
+                    <button class="amenity-purchase-btn" data-amenity-id="6" onclick="purchaseAmenity(event, this)">購入</button>
+                </div>
+                <div class="amenity-option" data-amenity-name="頭皮クレンジングシャンプー" data-amenity-id="7" data-price="2000" data-recommendation-score="82" onclick="selectAmenity(this)">
+                    <img src="https://via.placeholder.com/60x60?text=Scalp+Shampoo" alt="頭皮クレンジングシャンプー" class="amenity-image">
+                    <div class="amenity-details">
+                        <div class="amenity-title">頭皮クレンジングシャンプー</div>
+                        <div class="amenity-desc">頭皮の匂いが気になる方へ。皮脂や汚れをすっきり洗い流します。</div>
+                        <div class="amenity-price">¥2,000</div>
+                        <div class="amenity-recommendation">おすすめ度: ★★★★☆ (82%)</div>
+                    </div>
+                    <button class="amenity-purchase-btn" data-amenity-id="7" onclick="purchaseAmenity(event, this)">購入</button>
+                </div>
+            </div>
+
+            <button class="primary-btn" onclick="confirmAmenitySelection()">選択したアメニティを確定</button>
+            <button class="secondary-btn" onclick="showScreen('booking-screen')">アメニティ予約に戻る</button>
+        </div>
+    </div>
+
+    <div class="screen" id="amenity-purchase-confirmation-screen">
+        <div class="header">
+            <button class="back-btn" onclick="showScreen('amenity-selection-screen')">←</button>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">購入内容をご確認ください</div>
+        </div>
+        <div class="content">
+            <div class="booking-details">
+                <div class="detail-row">
+                    <span>商品名</span>
+                    <span id="purchase-confirm-name"></span>
+                </div>
+                <div class="detail-row">
+                    <span>価格</span>
+                    <span id="purchase-confirm-price"></span>
+                </div>
+                <div class="detail-row">
+                    <span>数量</span>
+                    <span id="purchase-confirm-quantity">1</span>
+                </div>
+                <div class="purchase-total">
+                    <span>合計金額</span>
+                    <span id="purchase-confirm-total"></span>
+                </div>
+            </div>
+            <button class="primary-btn" onclick="completeAmenityPurchase()">購入を確定する</button>
+            <button class="secondary-btn" onclick="showScreen('amenity-selection-screen')">アメニティ選択に戻る</button>
+        </div>
+    </div>
+
+
     <div class="screen" id="booking-confirmation">
         <div class="header">
             <button class="back-btn" onclick="showScreen('booking-screen')">←</button>
-            <div class="logo">垢抜け道場 予約確認</div>
+            <div class="logo">美ジネスマン</div>
             <div class="tagline">内容をご確認の上、予約を確定してください</div>
         </div>
 
         <div class="content">
             <div class="booking-details">
                 <div class="detail-row">
-                    <span>サービス</span>
-                    <span id="confirm-service-name"></span>
-                </div>
-                <div class="detail-row">
-                    <span>日時</span>
-                    <span id="confirm-booking-datetime"></span>
+                    <span>チェックイン日</span>
+                    <span id="confirm-checkin-date"></span>
                 </div>
                 <div class="detail-row">
                     <span>場所</span>
                     <span id="confirm-location"></span>
                 </div>
                 <div class="detail-row">
-                    <span>所要時間</span>
-                    <span id="confirm-duration"></span>
-                </div>
-                <div class="detail-row">
-                    <span>料金</span>
-                    <span id="confirm-price"></span>
-                </div>
-                <div class="detail-row">
-                    <span>獲得予定ポイント</span>
-                    <span id="confirm-points-to-earn"></span>
+                    <span>提供アメニティ</span>
+                    <span id="confirm-amenities">選択なし</span>
                 </div>
             </div>
 
@@ -1231,8 +1624,8 @@
     <div class="screen" id="refresh-confirmation">
         <div class="header">
             <button class="back-btn" onclick="showScreen('refresh-screen')">←</button>
-            <div class="logo">垢抜け道場 リフレッシュ予約確認</div>
-            <div class="tagline">リフレッシュサービスのご予約内容</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">ご予約内容をご確認ください</div>
         </div>
 
         <div class="content">
@@ -1262,10 +1655,12 @@
             <div class="service-card">
                 <div class="service-title">サービス設備</div>
                 <div class="service-desc">
-                    • 冷却ミストシャワー<br>
-                    • マッサージチェア<br>
-                    • UVアフターケア用品 (場所による)<br>
-                    • 冷たいタオル・ドリンク
+                    • クールダウンミストシャワー<br>
+                    • 疲労回復マッサージチェア<br>
+                    • UVアフターケア用品<br>
+                    • 冷たいタオル・ドリンク<br>
+                    • 美容プロテイン提供（一部コース）<br>
+                    • 親子向け美容サービス対応
                 </div>
             </div>
 
@@ -1283,30 +1678,36 @@
         <div class="content">
             <div class="confirmation-screen">
                 <div class="success-icon">✅</div>
-                <div class="confirmation-title">予約が確定しました</div>
-                <p>担当スタイリストから24時間以内にご連絡いたします。</p>
+                <div class="confirmation-title">アメニティ手配が確定しました</div>
+                <p>チェックイン時にホテルにてアメニティをお受け取りいただけます。</p>
 
                 <div class="booking-details">
                     <div class="detail-row">
                         <span>予約番号</span>
-                        <span>#ADJ-2025-0001</span>
+                        <span>#AMN-2025-0001</span>
                     </div>
                     <div class="detail-row">
-                        <span>サービス</span>
-                        <span id="success-service-name"></span>
+                        <span>チェックイン日</span>
+                        <span id="success-checkin-date"></span>
                     </div>
                     <div class="detail-row">
-                        <span>日時</span>
-                        <span id="success-booking-datetime"></span>
+                        <span>ホテル</span>
+                        <span id="success-hotel-name"></span>
                     </div>
-                    <div class="detail-row">
-                        <span>獲得ポイント</span>
-                        <span id="success-earned-points"></span>
+                    <div class="detail-row" id="success-amenities-row" style="display:none;">
+                        <span>提供アメニティ</span>
+                        <span id="success-provided-amenities"></span>
                     </div>
+                </div>
+                <div class="service-card" style="background: #e6f7ff; border-color: #91d5ff;">
+                    <div class="service-title" style="color: #1890ff;">💡 提供アメニティはいかがでしたか？</div>
+                    <div class="service-desc" style="color: #333;">
+                        お渡ししたアメニティが気に入りましたら、<br>マイプロフィールのご利用履歴からいつでもご購入いただけます。
+                    </div>
+                    <button class="primary-btn" onclick="showScreen('profile-screen')">利用履歴を見る</button>
                 </div>
 
                 <button class="primary-btn" onclick="showScreen('home-screen')">ホームに戻る</button>
-                <button class="secondary-btn" onclick="showScreen('profile-screen')">プロフィールを見る</button>
             </div>
         </div>
     </div>
@@ -1314,8 +1715,8 @@
     <div class="screen" id="articles-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('home-screen')">←</button>
-            <div class="logo">垢抜け道場 美容記事</div>
-            <div class="tagline">50代男性のためのエイジングケア</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">美容で差をつける、ビジネススキル</div>
         </div>
 
         <div class="content">
@@ -1334,7 +1735,7 @@
                 <div class="service-desc">
                     薄毛や白髪が気になり始めたら？ プロのスタイリストが提案する、大人の魅力を引き出すヘアスタイル。
                 </div>
-                <button class="secondary-btn" onclick="alert('記事詳細ページに移動します')">続きを読む</button>
+                <button class="secondary-btn" onclick="alert('すべての記事を見る画面に移動します')">続きを読む</button>
             </div>
 
             <div class="service-card">
@@ -1343,10 +1744,10 @@
                 <div class="service-desc">
                     肌タイプに合わせた洗顔料で、清潔な肌を保ち、その後のケアの効果を高めましょう。
                 </div>
-                <button class="secondary-btn" onclick="alert('記事詳細ページに移動します')">もっと見る</button>
+                <button class="secondary-btn" onclick="alert('すべての記事を見る画面に移動します')">もっと見る</button>
             </div>
 
-            <button class="primary-btn" onclick="alert('新しい記事をもっと見る画面に移動します')">すべての記事を見る</button>
+            <button class="primary-btn" onclick="alert('すべての記事を見る画面に移動します')">すべての記事を見る</button>
         </div>
 
         <div class="bottom-nav">
@@ -1360,8 +1761,8 @@
     <div class="screen" id="profile-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('home-screen')">←</button>
-            <div class="logo">垢抜け道場 マイプロフィール</div>
-            <div class="tagline">田中 太郎さん</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">佐藤 敏夫さん のプロフィール</div>
         </div>
 
         <div class="content">
@@ -1369,32 +1770,40 @@
                 <div class="service-title">アカウント情報</div>
                 <div class="service-desc">
                     会員ランク: プレミアム<br>
-                    利用回数: 15回<br>
+                    ご利用状況: ビジネス出張で美容意識UP中<br>
                     ポイント: <span id="profile-current-points">2,450</span>pt
                 </div>
                 <button class="secondary-btn" onclick="showScreen('point-history-screen')">ポイント履歴を見る</button>
             </div>
 
             <div class="service-card">
-                <div class="service-title">最近の予約</div>
-                <div class="service-desc">
-                    7月5日 プレミアムケア（確定）<br>
-                    6月28日 ベーシックカット（完了）<br>
-                    6月15日 ゴルフ場ブース（完了）
+                <div class="service-title">最近のアメニティ予約</div>
+                <div class="service-desc" id="recent-amenity-bookings-list">
+                    7月5日 ビジネスホテル（高保湿ローション、エイジングケア美容液）<br>
+                    6月28日 ビジネスホテル（皮脂コントロール洗顔料）
                 </div>
             </div>
 
-            <div class="service-card">
-                <div class="service-title">お気に入りスタイリスト</div>
-                <div class="service-desc">
-                    山田 花子さん ★★★★★<br>
-                    佐藤 次郎さん ★★★★☆
-                </div>
+            <div class="diagnosis-graph">
+                <div class="graph-title">AI肌診断履歴 (肌スコア推移)</div>
+                <div class="graph-container" id="ai-diagnosis-graph-container">
+                    </div>
+                <p style="font-size: 12px; color: #666; margin-top: 15px;">スコアが高いほど肌状態が良いことを示します。日々のケアの効果を確認しましょう。</p>
             </div>
+
+            
+            <div class="service-card">
+                <div class="service-title">アメニティ購入・利用履歴</div>
+                <div class="service-desc">
+                    過去に提供されたアメニティを再購入したり、利用履歴を確認できます。
+                </div>
+                <button class="primary-btn" onclick="showScreen('amenity-selection-screen')">アメニティを購入</button>
+                <button class="secondary-btn" onclick="alert('アメニティ利用・購入履歴詳細画面に移動します')">利用・購入履歴を見る</button>
+            </div>
+
 
             <button class="primary-btn" onclick="showScreen('rewards-store-screen')">リワードストアへ</button>
             <button class="secondary-btn" onclick="alert('設定画面に移動します')">設定</button>
-            <button class="secondary-btn" onclick="alert('お気に入り管理画面に移動します')">お気に入り管理</button>
         </div>
 
         <div class="bottom-nav">
@@ -1408,8 +1817,8 @@
     <div class="screen" id="rewards-store-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('home-screen')">←</button>
-            <div class="logo">垢抜け道場 リワードストア</div>
-            <div class="tagline">ポイントで豪華美容品をゲット！</div>
+            <div class="logo">美ジネスマン</div>
+            <div class="tagline">ポイントでワンランク上のアイテムをゲット！</div>
         </div>
 
         <div class="content">
@@ -1418,13 +1827,13 @@
                 <div class="service-desc" style="font-size: 24px; font-weight: 700; color: #FF9800;" id="rewards-current-points">2,450pt</div>
             </div>
 
-            <h3 style="color: #0A3D34; margin-bottom: 15px;">おすすめ豪華美容品</h3>
+            <h3 style="color: #0A3D34; margin-bottom: 15px;">おすすめ美容アイテム</h3>
 
             <div class="reward-item">
                 <img src="https://via.placeholder.com/80x80?text=Face+Lotion" alt="フェイスローション" class="reward-item-image">
                 <div class="reward-item-details">
                     <div class="reward-item-title">高保湿フェイスローション</div>
-                    <div class="reward-item-desc">ゴルフ後の乾燥対策に。べたつかないサラッとした使い心地。</div>
+                    <div class="reward-item-desc">ビジネスシーンでの乾燥対策に。べたつかないサラッとした使い心地。</div>
                     <div class="reward-item-points">500pt</div>
                 </div>
                 <button class="exchange-btn" data-points-cost="500" data-reward-name="高保湿フェイスローション" onclick="exchangeReward(this)">交換する</button>
@@ -1434,7 +1843,7 @@
                 <img src="https://via.placeholder.com/80x80?text=Hair+Wax" alt="ヘアワックス" class="reward-item-image">
                 <div class="reward-item-details">
                     <div class="reward-item-title">オーガニックヘアワックス</div>
-                    <div class="reward-item-desc">自然なセット力とツヤ。ゴルフ中でもスタイルキープ。</div>
+                    <div class="reward-item-desc">自然なセット力とツヤ。好印象を与えるスタイリングに。</div>
                     <div class="reward-item-points">300pt</div>
                 </div>
                 <button class="exchange-btn" data-points-cost="300" data-reward-name="オーガニックヘアワックス" onclick="exchangeReward(this)">交換する</button>
@@ -1444,30 +1853,63 @@
                 <img src="https://via.placeholder.com/80x80?text=Sun+Cream" alt="日焼け止め" class="reward-item-image">
                 <div class="reward-item-details">
                     <div class="reward-item-title">強力UVカット日焼け止め</div>
-                    <div class="reward-item-desc">SPF50+ PA++++。ゴルフプレー時の紫外線から肌を守る。</div>
+                    <div class="reward-item-desc">外出時の紫外線から肌を守る。ベタつかず、白浮きしないタイプ。</div>
                     <div class="reward-item-points">750pt</div>
                 </div>
                 <button class="exchange-btn" data-points-cost="750" data-reward-name="強力UVカット日焼け止め" onclick="exchangeReward(this)">交換する</button>
             </div>
 
+            <h3 style="color: #0A3D34; margin-bottom: 15px; margin-top: 25px;">大切な方へのプレゼント</h3>
+
             <div class="reward-item">
-                <img src="https://via.placeholder.com/80x80?text=Massage+Oil" alt="マッサージオイル" class="reward-item-image">
+                <img src="https://via.placeholder.com/80x80?text=Lip+Gloss" alt="リップグロス" class="reward-item-image">
                 <div class="reward-item-details">
-                    <div class="reward-item-title">疲労回復マッサージオイル</div>
-                    <div class="reward-item-desc">ゴルフ後の筋肉の疲れを癒やすアロマオイル。</div>
+                    <div class="reward-item-title">人気ブランドリップグロス</div>
+                    <div class="reward-item-desc">流行に敏感な方へのプレゼントに。SNSで話題のアイテム。</div>
+                    <div class="reward-item-points">1200pt</div>
+                </div>
+                <button class="exchange-btn" data-points-cost="1200" data-reward-name="人気ブランドリップグロス" onclick="exchangeReward(this)">交換する</button>
+            </div>
+
+            <div class="reward-item">
+                <img src="https://via.placeholder.com/80x80?text=Hair+Mist" alt="ヘアミスト" class="reward-item-image">
+                <div class="reward-item-details">
+                    <div class="reward-item-title">香り続くヘアフレグランスミスト</div>
+                    <div class="reward-item-desc">上品な香りが持続する、人気のヘアミスト。</div>
+                    <div class="reward-item-points">800pt</div>
+                </div>
+                <button class="exchange-btn" data-points-cost="800" data-reward-name="香り続くヘアフレグランスミスト" onclick="exchangeReward(this)">交換する</button>
+            </div>
+
+            <div class="reward-item">
+                <img src="https://via.placeholder.com/80x80?text=Sheet+Mask" alt="シートマスク" class="reward-item-image">
+                <div class="reward-item-details">
+                    <div class="reward-item-title">贅沢スペシャルシートマスクセット</div>
+                    <div class="reward-item-desc">特別な日のための、高機能シートマスク。</div>
                     <div class="reward-item-points">600pt</div>
                 </div>
-                <button class="exchange-btn" data-points-cost="600" data-reward-name="疲労回復マッサージオイル" onclick="exchangeReward(this)">交換する</button>
+                <button class="exchange-btn" data-points-cost="600" data-reward-name="贅沢スペシャルシートマスクセット" onclick="exchangeReward(this)">交換する</button>
             </div>
+
+            <div class="reward-item">
+                <img src="https://via.placeholder.com/80x80?text=Mini+Perfume" alt="ミニ香水" class="reward-item-image">
+                <div class="reward-item-details">
+                    <div class="reward-item-title">ミニボトル香水コレクション</div>
+                    <div class="reward-item-desc">気分に合わせて選べる、人気の香りのミニ香水セット。</div>
+                    <div class="reward-item-points">1500pt</div>
+                </div>
+                <button class="exchange-btn" data-points-cost="1500" data-reward-name="ミニボトル香水コレクション" onclick="exchangeReward(this)">交換する</button>
+            </div>
+
             
-            <button class="secondary-btn" onclick="alert('新しい商品をもっと見る画面に移動します')">もっと見る</button>
+            <button class="secondary-btn" onclick="alert('すべての商品を見る画面に移動します')">もっと見る</button>
         </div>
     </div>
 
     <div class="screen" id="point-history-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('profile-screen')">←</button>
-            <div class="logo">垢抜け道場 ポイント履歴</div>
+            <div class="logo">美ジネスマン</div>
             <div class="tagline">あなたのポイント獲得・利用履歴</div>
         </div>
 
@@ -1482,8 +1924,8 @@
             <div class="booking-details">
                 <div class="detail-row">
                     <span>2025/07/03</span>
-                    <span>プレミアムケア利用</span>
-                    <span style="color: #28A745;">+150pt</span>
+                    <span>アメニティ提供予約</span>
+                    <span style="color: #28A745;">+0pt</span>
                 </div>
                 <div class="detail-row">
                     <span>2025/06/28</span>
@@ -1492,13 +1934,13 @@
                 </div>
                 <div class="detail-row">
                     <span>2025/06/20</span>
-                    <span>オーガニックヘアワックス交換</span>
-                    <span style="color: #D32F2F;">-300pt</span>
+                    <span>人気ブランドリップグロス交換</span>
+                    <span style="color: #D32F2F;">-1200pt</span>
                 </div>
                 <div class="detail-row">
                     <span>2025/06/15</span>
-                    <span>ベーシックカット利用</span>
-                    <span style="color: #28A745;">+80pt</span>
+                    <span>アメニティ提供予約</span>
+                    <span style="color: #28A745;">+0pt</span>
                 </div>
                 <div class="detail-row">
                     <span>2025/06/01</span>
@@ -1513,7 +1955,7 @@
     <div class="screen" id="loading-screen">
         <div class="header">
             <button class="back-btn" onclick="showScreen('home-screen')">←</button>
-            <div class="logo">垢抜け道場 AI診断中</div>
+            <div class="logo">美ジネスマン</div>
             <div class="tagline">肌状態を分析しています...</div>
         </div>
 
@@ -1528,11 +1970,24 @@
 
     <script>
         let currentScreen = 'home-screen';
-        let selectedService = null;
-        let selectedTime = null;
-        let selectedRefreshLocation = null; // リフレッシュサービスの場所を格納
-        let userPoints = 2450; // ユーザーの初期ポイントをシミュレーション
-        let aiExpression = 'tsundere'; // AI診断の初期表現
+        let userPoints = 2450;
+        let aiExpression = 'tsundere';
+        let selectedAmenities = []; // 選択されたアメニティを格納 (無料提供用)
+        // 悩み問診の項目に 'smell' を追加
+        let userConcerns = { skin: [], hair: [], smell: [] }; // ユーザーの悩み問診結果
+        let amenityToPurchase = null; // 購入対象のアメニティ
+
+        let aiDiagnosisCompleted = false;
+        let concernQuestionnaireCompleted = false;
+
+        // AI肌診断履歴を保存する配列
+        // 例: [{ date: '2025-06-01', score: 85 }, { date: '2025-06-15', score: 88 }]
+        let aiDiagnosisHistory = [
+            { date: '2025/05/10', score: 78 },
+            { date: '2025/05/25', score: 82 },
+            { date: '2025/06/10', score: 85 },
+            { date: '2025/06/28', score: 80 }
+        ]; 
 
         // 画面切り替え関数
         function showScreen(screenId) {
@@ -1543,10 +1998,47 @@
             document.getElementById(screenId).classList.add('active');
             currentScreen = screenId;
 
+            if (screenId === 'booking-screen') {
+                updateAmenityDisplay();
+                updateConcernSummaryDisplay();
+                updateBookingScreenState(); // 予約画面のボタン有効/無効を更新
+            } else if (screenId === 'profile-screen') { // プロフィール画面に遷移する際にグラフを更新
+                updateProfileScreen();
+            }
+
+
             updateNavTabs(screenId);
-            updateBottomNav(screenId); // Update bottom nav visibility and active state
-            updatePointsDisplay(); // ポイント表示を更新
+            updateBottomNav(screenId);
+            updatePointsDisplay();
         }
+
+        // 予約画面のボタン有効/無効を更新する関数
+        function updateBookingScreenState() {
+            const amenitySelectionBtn = document.getElementById('amenity-selection-btn');
+            const confirmBookingBtn = document.getElementById('confirm-booking-btn');
+            const hotelNameAddressInput = document.getElementById('hotel-name-address');
+            const checkInDateInput = document.getElementById('check-in-date');
+
+            // AI診断と悩み問診が両方完了している場合のみ、アメニティ選択ボタンを有効化
+            if (aiDiagnosisCompleted && concernQuestionnaireCompleted) {
+                amenitySelectionBtn.disabled = false;
+                amenitySelectionBtn.textContent = 'AI診断・問診結果からアメニティを選ぶ';
+            } else {
+                amenitySelectionBtn.disabled = true;
+                amenitySelectionBtn.textContent = 'AI診断と問診を完了してアメニティを選ぶ';
+            }
+
+            // 宿泊日時、ホテル情報、アメニティ選択、AI診断・問診が全て完了している場合にのみ、予約確認ボタンを有効化
+            const isHotelInfoProvided = hotelNameAddressInput.value.trim() !== '';
+            const isCheckInDateSelected = checkInDateInput.value.trim() !== '';
+            
+            if (isCheckInDateSelected && isHotelInfoProvided && selectedAmenities.length > 0 && aiDiagnosisCompleted && concernQuestionnaireCompleted) {
+                confirmBookingBtn.disabled = false;
+            } else {
+                confirmBookingBtn.disabled = true;
+            }
+        }
+
 
         // ポイント表示の更新
         function updatePointsDisplay() {
@@ -1577,7 +2069,10 @@
                 'articles-screen': 'articles',
                 'profile-screen': 'profile',
                 'rewards-store-screen': 'profile',
-                'point-history-screen': 'profile'
+                'point-history-screen': 'profile',
+                'amenity-selection-screen': 'booking',
+                'concern-questionnaire-screen': 'booking',
+                'amenity-purchase-confirmation-screen': 'booking'
             };
 
             let targetTab = tabMap[screenId];
@@ -1591,8 +2086,6 @@
             const bottomNav = document.querySelector('.bottom-nav');
             const navItems = document.querySelectorAll('.bottom-nav .nav-item');
 
-            // Show bottom nav only for main navigation screens on mobile
-            // 画面幅が768px以上の場合、ボトムナビを非表示にする
             if (window.innerWidth >= 768) {
                 bottomNav.style.display = 'none';
                 return;
@@ -1603,7 +2096,6 @@
                 bottomNav.style.display = 'flex';
                 navItems.forEach(item => item.classList.remove('active'));
                 
-                // Set active state for bottom nav items
                 if (screenId === 'home-screen') document.querySelector('.bottom-nav [data-screen="home"]').classList.add('active');
                 else if (screenId === 'booking-screen') document.querySelector('.bottom-nav [data-screen="booking"]').classList.add('active');
                 else if (screenId === 'articles-screen') document.querySelector('.bottom-nav [data-screen="articles"]').classList.add('active');
@@ -1614,55 +2106,38 @@
             }
         }
 
-        // サービス選択
-        function selectService(element) {
-            document.querySelectorAll('.service-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            element.classList.add('selected');
-            selectedService = element;
-        }
-
-        // 時間選択
+        // 時間選択 (詳細診断予約用) - アメニティ予約には直接関係なし
         function selectTime(element) {
-            document.querySelectorAll('.time-slot').forEach(slot => {
-                slot.classList.remove('selected');
-            });
-            element.classList.add('selected');
-            selectedTime = element.textContent;
+            // 現在の画面が詳細診断予約画面の場合のみ処理
+            if (currentScreen === 'detailed-diagnosis-booking-screen') {
+                document.querySelectorAll('#detailed-diagnosis-booking-screen .time-slot').forEach(slot => {
+                    slot.classList.remove('selected');
+                });
+                element.classList.add('selected');
+                // selectedTime = element.textContent; // 詳細診断予約時にのみ使用
+            }
         }
 
-        // 予約確認画面の表示（出張予約用）
+        // アメニティ予約確認画面の表示
         function showBookingConfirmation() {
-            if (!selectedService || !selectedTime) {
-                alert('サービスと希望日時を選択してください。');
-                return;
-            }
-            const serviceName = selectedService.querySelector('.option-title').textContent;
-            const servicePrice = selectedService.querySelector('.option-price').textContent;
-            const serviceDuration = selectedService.dataset.duration; // data-duration属性から取得
-            const servicePoints = selectedService.dataset.points;
+            const checkInDate = document.getElementById('check-in-date').value;
             const selectedLocationType = document.getElementById('booking-location-type').value;
+            const hotelNameAndAddress = document.getElementById('hotel-name-address').value;
 
-            // 日付は現在の仮値を使用
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, '0');
-            const day = String(today.getDate()).padStart(2, '0');
-            const bookingDateTime = `${year}年${month}月${day}日 ${selectedTime}`;
-
-            document.getElementById('confirm-service-name').textContent = serviceName;
-            document.getElementById('confirm-booking-datetime').textContent = bookingDateTime;
-            document.getElementById('confirm-location').textContent = selectedLocationType;
-            document.getElementById('confirm-duration').textContent = serviceDuration;
-            document.getElementById('confirm-price').textContent = servicePrice;
-            document.getElementById('confirm-points-to-earn').textContent = servicePoints + 'pt';
+            document.getElementById('confirm-checkin-date').textContent = checkInDate;
+            document.getElementById('confirm-location').textContent = `${selectedLocationType} (${hotelNameAndAddress})`;
+            
+            if (selectedAmenities.length > 0) {
+                document.getElementById('confirm-amenities').textContent = selectedAmenities.map(a => a.name).join(', ');
+            } else {
+                document.getElementById('confirm-amenities').textContent = '選択なし';
+            }
 
             showScreen('booking-confirmation');
         }
 
 
-        // リフレッシュ場所選択
+        // リフレッシュ場所選択 (ゴルフ場リフレッシュサービス用)
         function selectRefreshLocation(element) {
             document.querySelectorAll('.refresh-location-card').forEach(location => {
                 location.classList.remove('selected');
@@ -1670,70 +2145,39 @@
             element.classList.add('selected');
             selectedRefreshLocation = element;
 
-            // リフレッシュ予約確認画面の情報を更新
             document.getElementById('confirm-refresh-location').textContent = selectedRefreshLocation.querySelector('.location-name').textContent;
             document.getElementById('confirm-refresh-points-to-earn').textContent = selectedRefreshLocation.dataset.points + 'pt';
             
-            // 選択された場所のタイプに基づいて料金を更新
-            let refreshPriceText = '';
-            const locationType = selectedRefreshLocation.dataset.locationType;
-            if (locationType === 'golf') {
-                refreshPriceText = '¥2,500 - ¥4,000'; // クールダウンとUVケアの合計
-            } else if (locationType === 'smoking') {
-                refreshPriceText = '¥500 - ¥800'; // ニオイケアとクイックマッサージの合計
-            }
-            document.getElementById('confirm-refresh-price').textContent = refreshPriceText;
-            document.getElementById('confirm-refresh-duration').textContent = '5分 - 15分'; // リフレッシュの所要時間も設定
+            document.getElementById('confirm-refresh-price').textContent = '¥500 - ¥4,500';
+            document.getElementById('confirm-refresh-duration').textContent = '5分 - 30分';
         }
 
-        // リフレッシュ場所のフィルタリング
+        // リフレッシュ場所のフィルタリング (ゴルフ場リフレッシュサービス用)
         function filterRefreshLocations() {
-            const selectedType = document.getElementById('refresh-location-type').value;
-            
-            // 全ての場所リストを非表示に
-            document.getElementById('golf-locations').style.display = 'none';
-            document.getElementById('smoking-locations').style.display = 'none';
+            document.getElementById('golf-locations').style.display = 'grid';
+            document.getElementById('golf-refresh-services').style.display = 'block';
+            document.getElementById('parent-child-services').style.display = 'block';
 
-            // 全てのサービス内容表示を非表示に
-            document.getElementById('golf-refresh-services').style.display = 'none';
-            document.getElementById('smoking-refresh-services').style.display = 'none';
-
-            if (selectedType === 'golf') {
-                document.getElementById('golf-locations').style.display = 'grid';
-                document.getElementById('golf-refresh-services').style.display = 'block';
-            } else if (selectedType === 'smoking') {
-                document.getElementById('smoking-locations').style.display = 'grid';
-                document.getElementById('smoking-refresh-services').style.display = 'block';
-            }
-            
-            // 場所の種類が切り替わったら選択をリセット
             document.querySelectorAll('.refresh-location-card').forEach(location => {
                 location.classList.remove('selected');
             });
             selectedRefreshLocation = null;
         }
 
-        // 出張予約確定
+        // アメニティ予約確定
         function confirmBooking() {
-            if (!selectedService || !selectedTime) {
-                alert('サービスと時間を選択してください。');
-                return;
+            const hotelName = document.getElementById('hotel-name-address').value;
+            const checkInDate = document.getElementById('check-in-date').value;
+
+            document.getElementById('success-hotel-name').textContent = hotelName;
+            document.getElementById('success-checkin-date').textContent = checkInDate;
+
+            if (selectedAmenities.length > 0) {
+                document.getElementById('success-amenities-row').style.display = 'flex';
+                document.getElementById('success-provided-amenities').textContent = selectedAmenities.map(a => a.name).join(', ');
+            } else {
+                document.getElementById('success-amenities-row').style.display = 'none';
             }
-
-            // ポイント獲得のシミュレーション
-            const pointsEarned = parseInt(selectedService.dataset.points);
-            userPoints += pointsEarned;
-            document.getElementById('success-earned-points').textContent = pointsEarned + 'pt';
-            document.getElementById('success-service-name').textContent = selectedService.querySelector('.option-title').textContent;
-
-            // 日付は現在の仮値を使用
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, '0');
-            const day = String(today.getDate()).padStart(2, '0');
-            const bookingDateTime = `${year}年${month}月${day}日 ${selectedTime}`;
-            document.getElementById('success-booking-datetime').textContent = bookingDateTime;
-
 
             setTimeout(() => {
                 showScreen('booking-success');
@@ -1747,20 +2191,17 @@
                 return;
             }
 
-            // ポイント獲得のシミュレーション
             const pointsEarned = parseInt(selectedRefreshLocation.dataset.points);
             userPoints += pointsEarned;
             document.getElementById('success-earned-points').textContent = pointsEarned + 'pt';
             document.getElementById('success-service-name').textContent = selectedRefreshLocation.querySelector('.location-name').textContent + ' リフレッシュサービス';
 
-            // 日付は現在の仮値を使用
             const today = new Date();
             const year = today.getFullYear();
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const day = String(today.getDate()).padStart(2, '0');
             const bookingDateTime = `${year}年${month}月${day}日 ${selectedTime}`;
             document.getElementById('success-booking-datetime').textContent = bookingDateTime;
-
 
             setTimeout(() => {
                 showScreen('booking-success');
@@ -1773,10 +2214,14 @@
             
             setTimeout(() => {
                 showDiagnosisResult();
+                aiDiagnosisCompleted = true;
+                document.getElementById('ai-diagnosis-status').textContent = '完了済み';
+                document.getElementById('ai-diagnosis-status').style.color = '#28A745';
+                updateBookingScreenState();
             }, 3000);
         }
 
-        // AI診断の表現を設定
+        // AI診断の表現設定
         function setDiagnosisExpression(expression) {
             aiExpression = expression;
             alert(`診断結果の表現を「${expression === 'tsundere' ? 'ツンデレ系' : (expression === 'cute' ? '可愛い系' : '漢系')}」に設定しました。`);
@@ -1786,27 +2231,32 @@
         function showDiagnosisResult() {
             let score, title, summary, taglineText;
             const randomScore = Math.floor(Math.random() * 20) + 70; // 70-89のランダムスコア
+            const cuteAvatarContainer = document.getElementById('cute-avatar-container');
+
+            // アバター表示の初期化
+            cuteAvatarContainer.style.display = 'none';
 
             if (aiExpression === 'tsundere') {
-                taglineText = "フン、まだ甘いな！バブルを知る男ならもっとだ！";
+                taglineText = "フン、まだ甘いな！ビジネスは顔で決まるんだぞ！";
                 if (randomScore >= 80) {
                     score = randomScore;
-                    title = "肌年齢: 実年齢より3歳若い...まぁ、及第点だ。";
-                    summary = "総合的には悪くない。だが、そこで満足するようでは一流にはなれないぞ。もっと高みを目指せ！";
+                    title = "肌年齢: 実年齢より3歳若い...まぁ、悪くはない。";
+                    summary = "総合的には及第点だ。だが、そこで満足するようでは一流のビジネスマンにはなれないぞ。もっと高みを目指せ！";
                 } else if (randomScore >= 70) {
                     score = randomScore;
                     title = "肌年齢: 実年齢並み...凡庸だな。";
                     summary = "現状維持などつまらない。これだからお前は凡人なのだ。もっと自分を追い込め！";
                 } else {
                     score = randomScore;
-                    title = "肌年齢: 実年齢より5歳老けてるぞ...バブルを語る資格もないな。";
+                    title = "肌年齢: 実年齢より5歳老けてるぞ...ビジネスで顔パスは無理だな。";
                     summary = "何をしているんだ、この体たらくは！このままではただの残念なオヤジだ。今すぐ、己を叩き直せ！";
                 }
             } else if (aiExpression === 'cute') {
                 taglineText = "わぁ！あなたの肌、とっても気になるな！一緒に見てみようね！";
+                cuteAvatarContainer.style.display = 'block'; // 可愛い系の場合にアバターを表示
                 if (randomScore >= 80) {
                     score = randomScore;
-                    title = "肌年齢: 実年齢より3歳若いね！すごーい！さすがバブル世代！";
+                    title = "肌年齢: 実年齢より3歳若いね！すごーい！ビジネスも絶好調だね！";
                     summary = "とっても良い状態だよ！この調子で、いつまでも素敵な肌をキープして、みんなを魅了しちゃおうね！";
                 } else if (randomScore >= 70) {
                     score = randomScore;
@@ -1817,7 +2267,7 @@
                     title = "肌年齢: 実年齢より5歳上かな？でも心配ないよ！";
                     summary = "ちょっとお疲れ気味みたいだね。でも心配ないよ！私と一緒に優しくケアすれば、きっともっとピカピカのお肌になるからね！";
                 }
-            } else if (aiExpression === 'manly') { // 漢系の場合
+            } else if (aiExpression === 'manly') {
                 taglineText = "黙って聞け！お前の肌に、俺が喝を入れてやる！";
                 if (randomScore >= 80) {
                     score = randomScore;
@@ -1838,9 +2288,108 @@
             document.getElementById('result-score').textContent = score;
             document.getElementById('result-title').textContent = title;
             document.getElementById('result-summary').textContent = summary;
-            document.getElementById('result-score').style.color = (score >= 80) ? '#28A745' : (score >= 70 ? '#FFC107' : '#D32F2F'); // スコアに応じて色を変更
+            document.getElementById('result-score').style.color = (score >= 80) ? '#28A745' : (score >= 70 ? '#FFC107' : '#D32F2F');
+
+            // AI診断履歴に結果を保存
+            const today = new Date();
+            const dateString = `${today.getFullYear()}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getDate().toString().padStart(2, '0')}`;
+            aiDiagnosisHistory.push({ date: dateString, score: score });
+            // 最新の5件のみを保持
+            if (aiDiagnosisHistory.length > 5) {
+                aiDiagnosisHistory = aiDiagnosisHistory.slice(aiDiagnosisHistory.length - 5); // 最新5件を保持するよう修正
+            }
 
             showScreen('ai-result-screen');
+        }
+
+        // 悩み問診の提出
+        function submitConcerns() {
+            userConcerns.skin = Array.from(document.querySelectorAll('#concern-questionnaire-screen input[name="skin-concern"]:checked')).map(cb => cb.value);
+            userConcerns.hair = Array.from(document.querySelectorAll('#concern-questionnaire-screen input[name="hair-concern"]:checked')).map(cb => cb.value);
+            // 匂いの悩みを取得
+            userConcerns.smell = Array.from(document.querySelectorAll('#concern-questionnaire-screen input[name="smell-concern"]:checked')).map(cb => cb.value);
+            
+            concernQuestionnaireCompleted = true;
+            document.getElementById('concern-summary-display').textContent = '回答済み';
+            document.getElementById('concern-summary-display').style.color = '#28A745';
+
+            updateBookingScreenState();
+            showScreen('booking-screen');
+        }
+
+        // 悩み問診のサマリーを予約画面に表示
+        function updateConcernSummaryDisplay() {
+            const displayElement = document.getElementById('concern-summary-display');
+            if (concernQuestionnaireCompleted) {
+                 displayElement.textContent = '回答済み';
+                 displayElement.style.color = '#28A745';
+            } else {
+                displayElement.textContent = '未回答';
+                displayElement.style.color = '#666';
+            }
+        }
+
+
+        // アメニティ選択（無料提供用）
+        function selectAmenity(element) {
+            const amenityName = element.dataset.amenityName;
+            const amenityId = element.dataset.amenityId;
+            const amenityPrice = parseFloat(element.dataset.price);
+
+            const existingIndex = selectedAmenities.findIndex(a => a.id === amenityId);
+            if (existingIndex > -1) {
+                selectedAmenities.splice(existingIndex, 1);
+                element.classList.remove('selected');
+            } else {
+                selectedAmenities.push({ id: amenityId, name: amenityName, price: amenityPrice });
+                element.classList.add('selected');
+            }
+            updateBookingScreenState();
+        }
+
+        // アメニティ選択確定（無料提供用）
+        function confirmAmenitySelection() {
+            updateAmenityDisplay();
+            showScreen('booking-screen');
+        }
+
+        // 選択されたアメニティを予約画面に表示
+        function updateAmenityDisplay() {
+            const displayElement = document.getElementById('selected-amenities-display');
+            if (selectedAmenities.length > 0) {
+                displayElement.textContent = selectedAmenities.map(a => a.name).join(', ');
+                displayElement.style.color = '#0A3D34';
+            } else {
+                displayElement.textContent = '選択されていません';
+                displayElement.style.color = '#666';
+            }
+        }
+
+        // アメニティ購入開始
+        function purchaseAmenity(event, buttonElement) {
+            event.stopPropagation();
+            const amenityId = buttonElement.dataset.amenityId;
+            const amenityElement = document.querySelector(`.amenity-option[data-amenity-id="${amenityId}"]`);
+            
+            amenityToPurchase = {
+                name: amenityElement.dataset.amenityName,
+                price: parseFloat(amenityElement.dataset.price)
+            };
+
+            document.getElementById('purchase-confirm-name').textContent = amenityToPurchase.name;
+            document.getElementById('purchase-confirm-price').textContent = `¥${amenityToPurchase.price.toLocaleString()}`;
+            document.getElementById('purchase-confirm-total').textContent = `¥${amenityToPurchase.price.toLocaleString()}`;
+
+            showScreen('amenity-purchase-confirmation-screen');
+        }
+
+        // アメニティ購入完了
+        function completeAmenityPurchase() {
+            if (amenityToPurchase) {
+                alert(`${amenityToPurchase.name} を購入しました！\n金額: ¥${amenityToPurchase.price.toLocaleString()}`);
+                amenityToPurchase = null;
+                showScreen('amenity-selection-screen');
+            }
         }
 
         // リワード交換
@@ -1852,15 +2401,53 @@
                 if (confirm(`${rewardName} を ${pointsCost}pt で交換しますか？`)) {
                     userPoints -= pointsCost;
                     alert(`${rewardName} を交換しました！\n残高: ${userPoints}pt`);
-                    updatePointsDisplay(); // ポイント表示を更新
-                    // ここで交換履歴に追加するロジック（今回は省略）
+                    updatePointsDisplay();
                 }
             } else {
                 alert('ポイントが不足しています。');
             }
         }
 
-        // タブクリックイベント (上部ナビゲーション)
+        // プロフィール画面のAI診断履歴グラフを更新する関数
+        function updateProfileScreen() {
+            const graphContainer = document.getElementById('ai-diagnosis-graph-container');
+            graphContainer.innerHTML = ''; // 既存のグラフをクリア
+
+            if (aiDiagnosisHistory.length === 0) {
+                graphContainer.innerHTML = '<p style="font-size:14px; color:#999; margin-top:20px;">まだAI肌診断の履歴はありません。</p>';
+                return;
+            }
+
+            // スコアを0-100の範囲に正規化してバーの高さを計算
+            const maxScorePossible = 100; 
+            // 最新の5件のみを表示 (aiDiagnosisHistoryがすでに最新5件になっていることを前提)
+            aiDiagnosisHistory.slice(-5).forEach(entry => { // 念のためslice(-5)で最後の5件を確実にする
+                const barHeight = (entry.score / maxScorePossible) * 100; // 100%を基準とする
+
+                const barWrapper = document.createElement('div');
+                barWrapper.className = 'graph-bar-wrapper';
+
+                const bar = document.createElement('div');
+                bar.className = 'graph-bar';
+                bar.style.height = `${barHeight}%`; // スコアに応じて高さを設定
+
+                const scoreText = document.createElement('div');
+                scoreText.className = 'graph-score';
+                scoreText.textContent = entry.score;
+
+                const dateText = document.createElement('div');
+                dateText.className = 'graph-date';
+                dateText.textContent = entry.date.substring(5).replace('/', '.'); // 月/日のみ表示
+
+                barWrapper.appendChild(scoreText);
+                barWrapper.appendChild(bar);
+                barWrapper.appendChild(dateText);
+                graphContainer.appendChild(barWrapper);
+            });
+        }
+
+
+        // タブクリックイベント
         document.querySelectorAll('.nav-tabs .nav-tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 let screenMap = {
@@ -1895,7 +2482,7 @@
         });
 
         // カードのアニメーション効果
-        document.querySelectorAll('.service-card, .reward-item, .refresh-location-card').forEach(card => {
+        document.querySelectorAll('.service-card, .reward-item, .refresh-location-card, .amenity-option').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-5px) scale(1.02)';
             });
@@ -1906,8 +2493,12 @@
         });
 
         // ボタンクリック効果
-        document.querySelectorAll('.book-btn, .primary-btn, .secondary-btn, .exchange-btn, .expression-btn').forEach(btn => {
+        document.querySelectorAll('.book-btn, .primary-btn, .secondary-btn, .exchange-btn, .expression-btn, .amenity-purchase-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
+                if (this.disabled) {
+                    e.preventDefault();
+                    return;
+                }
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
@@ -1918,9 +2509,23 @@
         // 初期化
         document.addEventListener('DOMContentLoaded', function() {
             showScreen('home-screen');
-            updatePointsDisplay(); // 初期ポイントを表示に反映
-            // デフォルトでゴルフ場を表示
-            filterRefreshLocations(); 
+            updatePointsDisplay();
+            // filterRefreshLocations(); はゴルフ場サービスに特有なので、今回はコメントアウトまたは削除
+
+            // ホテル名・住所入力フィールドの変更を監視し、予約ボタンの有効/無効を更新
+            document.getElementById('hotel-name-address').addEventListener('input', updateBookingScreenState);
+            document.getElementById('check-in-date').addEventListener('change', updateBookingScreenState);
+
+            updateBookingScreenState(); // 初期表示時のボタン状態を更新
+            
+            // 現在日付からチェックイン可能な最小日付を設定
+            const today = new Date();
+            today.setDate(today.getDate() + 1); // 明日から選択可能にする
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const minDate = `${year}-${month}-${day}`;
+            document.getElementById('check-in-date').min = minDate;
         });
 
         // ウィンドウのリサイズ時にボトムナビの表示を更新
